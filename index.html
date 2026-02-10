@@ -5,42 +5,133 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Künefe Sipariş</title>
 <style>
-body{margin:0;font-family:Arial;background:#111;color:#fff;text-align:center}
-.header{padding:30px}
-img{width:90%;max-width:420px;border-radius:12px;margin:10px 0}
-.menu{padding:20px}
-.item{background:#1b1b1b;margin:10px;padding:15px;border-radius:10px;font-size:20px}
-.btn{
-display:inline-block;margin-top:20px;padding:15px 25px;
-background:#25D366;color:white;text-decoration:none;
-font-size:22px;border-radius:8px
+body{margin:0;font-family:Arial;background:#111;color:#fff}
+h1{text-align:center;padding:20px}
+.menu-buttons{
+display:flex;gap:15px;justify-content:center;flex-wrap:wrap;padding:20px
 }
-.footer{margin-top:30px;font-size:14px;color:#aaa}
+.menu-btn{
+width:160px;height:160px;border-radius:12px;
+background-size:cover;background-position:center;
+display:flex;align-items:flex-end;justify-content:center;
+font-size:20px;font-weight:bold;padding:10px;cursor:pointer;
+}
+.section{display:none;padding:15px}
+.item{
+background:#1c1c1c;margin:12px 0;border-radius:10px;
+padding:10px;text-align:center
+}
+.item img{width:100%;border-radius:10px}
+button{
+margin-top:10px;padding:10px 15px;
+border:none;border-radius:6px;
+background:#25D366;color:#fff;font-size:16px;cursor:pointer
+}
+.cart{
+position:fixed;bottom:0;left:0;right:0;
+background:#000;padding:15px;text-align:center
+}
 </style>
 </head>
 <body>
 
-<div class="header">
 <h1>🔥 Künefe Sipariş 🔥</h1>
-<p>Sıcacık, çıtır çıtır gerçek Hatay künefesi</p>
+
+<div class="menu-buttons">
+<div class="menu-btn"
+style="background-image:url('https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg')"
+onclick="showMenu('kunefe')">Künefeler</div>
+
+<div class="menu-btn"
+style="background-image:url('https://images.pexels.com/photos/544961/pexels-photo-544961.jpeg')"
+onclick="showMenu('icecek')">İçecekler</div>
 </div>
 
-<img src="https://images.unsplash.com/photo-1604908554027-1e5a6f1f0f0a" alt="kunefe"/>
+<!-- KUNEFELER -->
+<div id="kunefe" class="section">
+<h2>Künefeler</h2>
 
-<div class="menu">
-<div class="item">Fıstıklı Künefe — 180₺</div>
-<div class="item">Kaymaklı Künefe — 200₺</div>
-<div class="item">Dondurmalı Künefe — 220₺</div>
-
-<a class="btn" href="https://wa.me/905424292515?text=Merhaba%20bir%20porsiyon%20künefe%20sipariş%20vermek%20istiyorum.">
-WhatsApp ile Sipariş Ver
-</a>
+<div class="item">
+<img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg">
+<h3>Fıstıklı Künefe — 180₺</h3>
+<button onclick="addToCart('Fıstıklı Künefe')">Sepete Ekle</button>
 </div>
 
-<div class="footer">
-Adres: Meydan Mah.<br/>
-Telefon: 0542 429 2515
+<div class="item">
+<img src="https://images.pexels.com/photos/4109995/pexels-photo-4109995.jpeg">
+<h3>Kaymaklı Künefe — 200₺</h3>
+<button onclick="addToCart('Kaymaklı Künefe')">Sepete Ekle</button>
 </div>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/1618898/pexels-photo-1618898.jpeg">
+<h3>Dondurmalı Künefe — 220₺</h3>
+<button onclick="addToCart('Dondurmalı Künefe')">Sepete Ekle</button>
+</div>
+
+</div>
+
+<!-- ICECEKLER -->
+<div id="icecek" class="section">
+<h2>İçecekler</h2>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg">
+<h3>Su — 20₺</h3>
+<button onclick="addToCart('Su')">Sepete Ekle</button>
+</div>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/162644/coca-cola-coke-soft-drink-162644.jpeg">
+<h3>Kola — 35₺</h3>
+<button onclick="addToCart('Kola')">Sepete Ekle</button>
+</div>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg">
+<h3>Fanta — 35₺</h3>
+<button onclick="addToCart('Fanta')">Sepete Ekle</button>
+</div>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg">
+<h3>Meyve Suyu — 40₺</h3>
+<button onclick="addToCart('Meyve Suyu')">Sepete Ekle</button>
+</div>
+
+<div class="item">
+<img src="https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg">
+<h3>Süt — 30₺</h3>
+<button onclick="addToCart('Süt')">Sepete Ekle</button>
+</div>
+
+</div>
+
+<div class="cart">
+<button onclick="sendOrder()">WhatsApp ile Siparişi Gönder</button>
+</div>
+
+<script>
+let cart=[];
+
+function showMenu(id){
+document.getElementById('kunefe').style.display='none';
+document.getElementById('icecek').style.display='none';
+document.getElementById(id).style.display='block';
+window.scrollTo(0,0);
+}
+
+function addToCart(item){
+cart.push(item);
+alert(item + " sepete eklendi");
+}
+
+function sendOrder(){
+if(cart.length==0){alert("Sepet boş");return;}
+let message="Sipariş:\\n"+cart.join("\\n");
+window.open("https://wa.me/905XXXXXXXXX?text="+encodeURIComponent(message));
+}
+</script>
 
 </body>
 </html>
