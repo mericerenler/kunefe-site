@@ -175,9 +175,22 @@ function inc(i){cart[i].q++;openCart();}
 function dec(i){cart[i].q--;if(cart[i].q<=0)cart.splice(i,1);openCart();}
 
 function send(){
-let ad = document.getElementById("name").value;
-let tel = document.getElementById("phone").value;
-let adres = document.getElementById("addr").value;
+let ad = document.getElementById("name").value.trim();
+let tel = document.getElementById("phone").value.trim();
+let adres = document.getElementById("addr").value.trim();
+
+// ZORUNLU ALAN KONTROLÜ
+if(ad === "" || tel === "" || adres === ""){
+    alert("Lütfen Ad Soyad, Telefon ve Adres alanlarını doldurun.");
+    return;
+}
+
+// Telefon basit doğrulama (en az 10 rakam)
+let rakamlar = tel.replace(/\D/g,'');
+if(rakamlar.length < 10){
+    alert("Telefon numarası hatalı görünüyor.");
+    return;
+}
 
 let msg="KRAL KÜNEFE SİPARİŞ\n\n";
 cart.forEach(i=>msg+=`${i.n} x${i.q} = ${i.p*i.q}₺\n`);
@@ -185,6 +198,7 @@ msg+=`\nAd: ${ad}\nTel: ${tel}\nAdres: ${adres}`;
 
 window.open("https://wa.me/905424292515?text="+encodeURIComponent(msg));
 }
+
 
 </script>
 
