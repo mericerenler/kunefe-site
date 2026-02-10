@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kral Künefe</title>
 
 <style>
-body{margin:0;font-family:Segoe UI;background:#0e0e0e;color:#fff}
-header{text-align:center;padding:20px;font-size:32px;font-weight:900}
-
-.menu-buttons{display:flex;gap:20px;padding:20px}
-.menu-card{flex:1;height:180px;border-radius:18px;overflow:hidden;position:relative;cursor:pointer}
-.menu-card img{width:100%;height:100%;object-fit:cover;filter:brightness(55%)}
-.menu-card span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:900}
-
-.section{display:none;padding:15px}
-
-.card{background:#1b1b1b;margin:15px 0;border-radius:14px;overflow:hidden}
+body{margin:0;font-family:Segoe UI;background:#0f0f0f;color:#fff}
+header{text-align:center;padding:20px;font-size:28px;font-weight:900}
+.section{display:none;padding:10px}
+.card{background:#1b1b1b;margin:14px 0;border-radius:14px;overflow:hidden}
 .card img{width:100%}
 .card-body{text-align:center;padding:12px}
+.btn{background:#25D366;border:none;padding:10px 16px;border-radius:8px;color:#fff;font-weight:bold;cursor:pointer}
+.btn:active{transform:scale(.92)}
 
-.btn{background:#25D366;border:none;padding:10px 18px;border-radius:8px;color:#fff}
+.menu-buttons{display:flex;gap:10px;padding:10px}
+.menu-buttons div{flex:1;position:relative;height:120px;border-radius:14px;overflow:hidden;cursor:pointer}
+.menu-buttons img{width:100%;height:100%;object-fit:cover;filter:brightness(45%)}
+.menu-buttons span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:900}
 
-.cart-bar{
-position:fixed;bottom:0;left:0;right:0;background:#111;padding:15px;text-align:center
-}
-.cart-bar button{
-background:#ff9800;border:none;padding:14px 22px;border-radius:10px;font-size:18px;font-weight:bold
+.cart-bar{position:fixed;bottom:0;left:0;right:0;background:#111;padding:12px;text-align:center}
+.cart-bar button{background:#ff9800;border:none;padding:14px;border-radius:10px;width:95%;font-weight:900}
+
+.back-btn{
+position:fixed;bottom:90px;right:15px;background:#444;
+padding:12px 18px;border-radius:50px;display:none;cursor:pointer
 }
 
 .modal{
 display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);
-align-items:center;justify-content:center
+justify-content:center;align-items:center;z-index:10
 }
-.modal-content{
-background:#222;padding:25px;border-radius:14px;width:90%;max-width:420px
+.modal-box{
+background:#1c1c1c;padding:20px;border-radius:14px;width:92%;max-width:420px
 }
-input,textarea{
-width:100%;padding:10px;margin:8px 0;border-radius:8px;border:none
+input,textarea{width:100%;padding:8px;margin:6px 0;border-radius:6px;border:none}
+hr{border-color:#333}
+.close{float:right;cursor:pointer}
+
+.contact{padding:20px;text-align:center}
+iframe{width:100%;height:200px;border:none;border-radius:12px;margin-top:10px}
+
+/* Büyük + - */
+.qty-btn{
+font-size:22px;padding:8px 14px;margin:0 4px;border:none;border-radius:6px;background:#ff9800;color:#000;font-weight:900;
 }
 
-.footer{
-background:#000;padding:30px 15px;text-align:center;margin-top:40px
+/* Toast */
+.toast{
+position:fixed;top:20px;left:50%;transform:translateX(-50%);
+background:#25D366;padding:12px 20px;border-radius:8px;font-weight:900;
+display:none;z-index:9999;animation:pop .4s ease;
 }
-iframe{width:100%;height:250px;border-radius:12px;border:none;margin-top:15px}
+@keyframes pop{
+from{transform:translateX(-50%) scale(.6);opacity:0}
+to{transform:translateX(-50%) scale(1);opacity:1}
+}
 </style>
 </head>
 
@@ -51,118 +64,128 @@ iframe{width:100%;height:250px;border-radius:12px;border:none;margin-top:15px}
 
 <header>👑 KRAL KÜNEFE 👑</header>
 
-<div class="menu-buttons">
-<div class="menu-card" onclick="show('kunefe')">
-<img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg">
-<span>KÜNEFELER</span>
-</div>
-
-<div class="menu-card" onclick="show('icecek')">
-<img src="https://images.pexels.com/photos/544961/pexels-photo-544961.jpeg">
-<span>İÇECEKLER</span>
-</div>
-</div>
-
-<!-- KUNEFELER -->
-<div id="kunefe" class="section">
-<button onclick="home()" class="btn">← Ana Sayfa</button>
-
-<div class="card">
-<img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg">
-<div class="card-body">
-<h3>Fıstıklı Künefe — 180₺</h3>
-<button class="btn" onclick="add('Fıstıklı Künefe',180)">Sepete Ekle</button>
-</div></div>
-
-<div class="card">
-<img src="https://images.pexels.com/photos/4109995/pexels-photo-4109995.jpeg">
-<div class="card-body">
-<h3>Kaymaklı Künefe — 200₺</h3>
-<button class="btn" onclick="add('Kaymaklı Künefe',200)">Sepete Ekle</button>
-</div></div>
-
-<div class="card">
-<img src="https://images.pexels.com/photos/1618898/pexels-photo-1618898.jpeg">
-<div class="card-body">
-<h3>Dondurmalı Künefe — 220₺</h3>
-<button class="btn" onclick="add('Dondurmalı Künefe',220)">Sepete Ekle</button>
-</div></div>
-</div>
-
-<!-- ICECEKLER -->
-<div id="icecek" class="section">
-<button onclick="home()" class="btn">← Ana Sayfa</button>
-
+<!-- ===== BURADAN FİYAT VE RESİM DEĞİŞTİR ===== -->
 <script>
-const drinks=[
-["Su",20,"https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg"],
-["Kola",35,"https://images.pexels.com/photos/162644/coca-cola-coke-soft-drink-162644.jpeg"],
-["Fanta",35,"https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"],
-["Meyve Suyu",40,"https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg"],
-["Süt",30,"https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg"]
+const PRODUCTS=[
+{cat:"kunefe",name:"Fıstıklı Künefe",price:180,img:"https://storage.kolaysiparis.com.tr/ks-prod/images/shop/62025b56c92fd/product/656cad428ead7/8H5qYHYMOhQX7GvGMRxiDx8WW8E20KIuxfbRB520.jpg"},
+{cat:"kunefe",name:"Kaymaklı Künefe",price:200,img:"https://storage.kolaysiparis.com.tr/ks-prod/images/shop/62025b56c92fd/product/656caad993643/aU3yaS7P26Jkyk973XALLrhyk5czLjWYqScd5uZG.jpg"},
+{cat:"kunefe",name:"Dondurmalı Künefe",price:220,img:"https://storage.kolaysiparis.com.tr/ks-prod/images/shop/62025b56c92fd/product/656cae8dd8377/03V9dpL716YNTAWE0Tsj2fZuYEnqj3Ph9mY4jDxZ.jpg"},
+{cat:"icecek",name:"Su",price:20,img:"https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg"},
+{cat:"icecek",name:"Kola",price:35,img:"https://productimages.hepsiburada.net/s/479/375-375/110000522298277.jpg"},
+{cat:"icecek",name:"Fanta",price:35,img:"https://images.migrosone.com/sanalmarket/product/08020000/08020000_1-c20362.jpg"},
+{cat:"icecek",name:"Meyve Suyu",price:40,img:"https://upload.wikimedia.org/wikipedia/commons/f/fd/Orange_juice_1.jpg"},
+{cat:"icecek",name:"Süt",price:30,img:"https://i.nefisyemektarifleri.com/2023/06/14/cig-sut-faydalari-ve-zararlari-ne-kadar-kaynatilmali-kac-gun-dayanir.jpg"},
 ];
-document.write(drinks.map(d=>`
-<div class="card">
-<img src="${d[2]}">
-<div class="card-body">
-<h3>${d[0]} — ${d[1]}₺</h3>
-<button class="btn" onclick="add('${d[0]}',${d[1]})">Sepete Ekle</button>
-</div></div>`).join(''));
 </script>
+<!-- ========================================== -->
+
+<div class="menu-buttons">
+<div onclick="show('kunefe')">
+<img src="https://static.ticimax.cloud/cdn-cgi/image/width=1240,quality=99/9247/uploads/blog/evde-kunefe-tarifi-0abd.jpg"><span>KÜNEFELER</span>
+</div>
+<div onclick="show('icecek')">
+<img src="https://images.pexels.com/photos/544961/pexels-photo-544961.jpeg"><span>İÇECEKLER</span>
+</div>
 </div>
 
-<!-- SEPET -->
+<div id="kunefe" class="section"></div>
+<div id="icecek" class="section"></div>
+
+<div class="back-btn" onclick="home()">← Geri</div>
+
 <div class="cart-bar">
-<button onclick="openModal()">🛒 Sepet (<span id="count">0</span>) - WhatsApp Sipariş Ver</button>
+<button onclick="openCart()">🛒 Sepet (<span id="count">0</span>) - WhatsApp Sipariş Ver</button>
 </div>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-<div class="modal-content">
-<h3>Sipariş Bilgileri</h3>
-<input id="ad" placeholder="Ad Soyad">
-<input id="tel" placeholder="Telefon">
-<textarea id="adres" placeholder="Adres"></textarea>
+<div class="modal" id="cartModal">
+<div class="modal-box">
+<span class="close" onclick="closeCart()">✖</span>
+<h3>Sepetiniz</h3>
+<div id="cartItems"></div>
+<hr>
+<b>Toplam: <span id="total">0</span>₺</b>
+<hr>
+<input id="name" placeholder="Ad Soyad">
+<input id="phone" placeholder="Telefon">
+<textarea id="addr" placeholder="Adres"></textarea>
 <button class="btn" onclick="send()">WhatsApp Gönder</button>
-<button class="btn" style="background:#555;margin-top:8px" onclick="closeModal()">Vazgeç</button>
-</div></div>
-
-<!-- FOOTER -->
-<div class="footer">
-<h2>Kral Künefe</h2>
-<p>📍 Meydan Mahallesi, Hatay</p>
-<p>📞 0542 429 25 15</p>
-
-<iframe src="https://www.google.com/maps?q=Hatay%20Meydan%20Mahallesi&output=embed"></iframe>
 </div>
+</div>
+
+<div class="contact">
+<h3>İletişim</h3>
+Telefon: 0542 429 25 15<br>
+Adres: Meydan Mah.<br>
+<iframe src="https://maps.google.com/maps?q=37.017482,37.974797&z=15&output=embed"></iframe>
+</div>
+
+<div id="toast" class="toast">Sepete eklendi ✓</div>
 
 <script>
 let cart=[];
 
+PRODUCTS.forEach(p=>{
+document.getElementById(p.cat).innerHTML+=`
+<div class="card">
+<img src="${p.img}">
+<div class="card-body">
+<h3>${p.name} — ${p.price}₺</h3>
+<button class="btn" onclick='add("${p.name}",${p.price})'>Sepete Ekle</button>
+</div></div>`;
+});
+
 function show(id){
 document.querySelectorAll('.section').forEach(s=>s.style.display='none');
 document.getElementById(id).style.display='block';
+document.querySelector('.back-btn').style.display='block';
 }
 
 function home(){
 document.querySelectorAll('.section').forEach(s=>s.style.display='none');
+document.querySelector('.back-btn').style.display='none';
 }
 
 function add(n,p){
 let f=cart.find(x=>x.n==n);
 if(f)f.q++;else cart.push({n,p,q:1});
-document.getElementById('count').innerText=cart.reduce((a,b)=>a+b.q,0);
+count.innerText=cart.reduce((a,b)=>a+b.q,0);
+
+let t=document.getElementById("toast");
+t.style.display="block";
+setTimeout(()=>t.style.display="none",900);
 }
 
-function openModal(){modal.style.display='flex'}
-function closeModal(){modal.style.display='none'}
+function openCart(){
+cartItems.innerHTML="";
+let t=0;
+cart.forEach((i,idx)=>{
+let sub=i.p*i.q;t+=sub;
+cartItems.innerHTML+=`
+<div>
+${i.n} x${i.q} = ${sub}₺
+<button class="qty-btn" onclick="inc(${idx})">+</button>
+<button class="qty-btn" onclick="dec(${idx})">−</button>
+</div>`;
+});
+total.innerText=t;
+cartModal.style.display='flex';
+}
+function closeCart(){cartModal.style.display='none';}
+function inc(i){cart[i].q++;openCart();}
+function dec(i){cart[i].q--;if(cart[i].q<=0)cart.splice(i,1);openCart();}
 
 function send(){
+let ad = document.getElementById("name").value;
+let tel = document.getElementById("phone").value;
+let adres = document.getElementById("addr").value;
+
 let msg="KRAL KÜNEFE SİPARİŞ\n\n";
 cart.forEach(i=>msg+=`${i.n} x${i.q} = ${i.p*i.q}₺\n`);
-msg+=`\nAd: ${ad.value}\nTelefon: ${tel.value}\nAdres: ${adres.value}`;
+msg+=`\nAd: ${ad}\nTel: ${tel}\nAdres: ${adres}`;
+
 window.open("https://wa.me/905424292515?text="+encodeURIComponent(msg));
 }
+
 </script>
 
 </body>
