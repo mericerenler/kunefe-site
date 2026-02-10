@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Künefe Sipariş</title>
+<style>
+body{margin:0;font-family:Arial;background:#111;color:#fff;text-align:center}
+.header{padding:30px}
+img{width:90%;max-width:420px;border-radius:12px;margin:10px 0}
+.menu{padding:20px}
+.item{background:#1b1b1b;margin:10px;padding:15px;border-radius:10px;font-size:20px}
+.btn{
+display:inline-block;margin-top:20px;padding:15px 25px;
+background:#25D366;color:white;text-decoration:none;
+font-size:22px;border-radius:8px
+}
+.footer{margin-top:30px;font-size:14px;color:#aaa}
+</style>
+</head>
+<body>
+
+<div class="header">
+<h1>🔥 Künefe Sipariş 🔥</h1>
+<p>Sıcacık, çıtır çıtır gerçek Hatay künefesi</p>
+</div>
+
+<img src="https://images.unsplash.com/photo-1604908554027-1e5a6f1f0f0a" alt="kunefe"/>
+
+<div class="menu">
+<div class="item">Fıstıklı Künefe — 180₺</div>
+<div class="item">Kaymaklı Künefe — 200₺</div>
+<div class="item">Dondurmalı Künefe — 220₺</div>
+
+<a class="btn" href="https://wa.me/905424292515?text=Merhaba%20bir%20porsiyon%20künefe%20sipariş%20vermek%20istiyorum.">
+WhatsApp ile Sipariş Ver
+</a>
+</div>
+
+<div class="footer">
+Adres: Meydan Mah.<br/>
+Telefon: 0542 429 2515
+</div>
+
+</body>
+</html>
